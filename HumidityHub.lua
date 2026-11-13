@@ -3,7 +3,7 @@
     Roblox Luau | Client-side ModuleScript / loadstring-compatible source
 
     Quick start:
-        local Library = loadstring(game:HttpGet("YOUR_RAW_URL"))()
+        local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/humiditybusinessemail-prog/humidity-hub/refs/heads/main/HumidityHub.lua"))()
         local Hub = Library.new({
             HubName = "Humidity Hub",
             GameName = "Universal",
