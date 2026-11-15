@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Humidity Hub | Your Token</title>
+<style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #0f0f13;
+        color: #ebebf0;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        padding: 20px;
+    }
+    .card {
+        width: 100%;
+        max-width: 420px;
+        background: #13131a;
+        border: 1px solid #2a2a34;
+        border-radius: 16px;
+        padding: 28px;
+        text-align: center;
+        animation: rise 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    @keyframes rise {
+        from { opacity: 0; transform: translateY(14px) scale(0.97); }
+        to { opacity: 1; transform: none; }
+    }
+    h1 { font-size: 20px; margin-bottom: 6px; }
+    p { font-size: 13px; color: #8c8c9b; line-height: 1.5; }
+    .token {
+        margin: 20px 0 14px;
+        padding: 14px;
+        background: #1a1a21;
+        border: 1px solid #2a2a34;
+        border-radius: 10px;
+        font-family: ui-monospace, Menlo, Consolas, monospace;
+        font-size: 13px;
+        word-break: break-all;
+        user-select: all;
+    }
+    button {
+        width: 100%;
+        padding: 12px;
+        border: 0;
+        border-radius: 10px;
+        background: #408cff;
+        color: #fff;
+        font-size: 14px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: transform 0.15s ease, background 0.2s ease;
+    }
+    button:hover { transform: translateY(-1px); }
+    button:active { transform: scale(0.98); }
+    button.done { background: #22c55e; }
+    .error { color: #ef4444; }
+    .hidden { display: none; }
+</style>
+</head>
+<body>
+    <div class="card">
+        <h1 id="title">Checkpoint complete</h1>
+        <p id="message">Copy your token and paste it into Humidity Hub.</p>
+        <div id="token" class="token hidden"></div>
+        <button id="copy" class="hidden">Copy token</button>
+    </div>
+    <script>
+        var params = new URLSearchParams(window.location.search);
+        var token = (params.get("token") || "").trim();
+        var valid = /^[A-Za-z0-9_-]{8,128}$/.test(token);
+
+        var title = document.getElementById("title");
+        var message = document.getElementById("message");
+        var tokenBox = document.getElementById("token");
+        var copyButton = document.getElementById("copy");
+
+        if (valid) {
+            tokenBox.textContent = token;
+            tokenBox.classList.remove("hidden");
+            copyButton.classList.remove("hidden");
+        } else {
+            title.textContent = "No token found";
+            title.classList.add("error");
+            message.textContent = "Finish the work.ink checkpoint first, it sends you back here with your token.";
+        }
+
+        copyButton.addEventListener("click", function () {
+            navigator.clipboard.writeText(token).then(function () {
+                copyButton.textContent = "Copied";
+                copyButton.classList.add("done");
+                setTimeout(function () {
+                    copyButton.textContent = "Copy token";
+                    copyButton.classList.remove("done");
+                }, 1800);
+            });
+        });
+    </script>
+</body>
+</html>
