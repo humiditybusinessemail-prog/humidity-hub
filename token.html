@@ -44,6 +44,13 @@
         word-break: break-all;
         user-select: all;
     }
+    .debug {
+        margin-top: 16px;
+        font-family: ui-monospace, Menlo, Consolas, monospace;
+        font-size: 11px;
+        color: #8c8c9b;
+        word-break: break-all;
+    }
     button {
         width: 100%;
         padding: 12px;
@@ -69,18 +76,38 @@
         <p id="message">Copy your token and paste it into Humidity Hub.</p>
         <div id="token" class="token hidden"></div>
         <button id="copy" class="hidden">Copy token</button>
+        <div id="debug" class="debug hidden"></div>
     </div>
     <script>
-        var params = new URLSearchParams(window.location.search);
-        var token = (params.get("token") || "").trim();
-        var valid = /^[A-Za-z0-9_-]{8,128}$/.test(token);
+        var pattern = /^[A-Za-z0-9_-]{8,128}$/;
+        var names = ["token", "t", "key", "tk"];
+
+        function readParams(text) {
+            return new URLSearchParams(text.replace(/^[?#]/, ""));
+        }
+
+        function findToken() {
+            var sources = [readParams(window.location.search), readParams(window.location.hash)];
+            for (var i = 0; i < sources.length; i++) {
+                for (var j = 0; j < names.length; j++) {
+                    var value = (sources[i].get(names[j]) || "").trim();
+                    if (pattern.test(value)) {
+                        return value;
+                    }
+                }
+            }
+            return "";
+        }
+
+        var token = findToken();
 
         var title = document.getElementById("title");
         var message = document.getElementById("message");
         var tokenBox = document.getElementById("token");
         var copyButton = document.getElementById("copy");
+        var debugBox = document.getElementById("debug");
 
-        if (valid) {
+        if (token) {
             tokenBox.textContent = token;
             tokenBox.classList.remove("hidden");
             copyButton.classList.remove("hidden");
@@ -88,6 +115,9 @@
             title.textContent = "No token found";
             title.classList.add("error");
             message.textContent = "Finish the work.ink checkpoint first, it sends you back here with your token.";
+            var received = window.location.search + window.location.hash;
+            debugBox.textContent = "Received: " + (received ? received : "(nothing after the page address)");
+            debugBox.classList.remove("hidden");
         }
 
         copyButton.addEventListener("click", function () {
