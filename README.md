@@ -12,7 +12,9 @@ A Roblox executor UI library with a built-in key system. Rounded, animated, them
 - Key system with async validation, countdown pill and an expiry lock
 - Optional free key flow: Supabase + work.ink, 24h for 1 checkpoint, 48h for 2
 
-<img width="925" height="627" alt="image" src="https://github.com/user-attachments/assets/016b31f1-772a-4510-b655-2541cfef963d" />
+<img width="1163" height="742" alt="image" src="https://github.com/user-attachments/assets/44ea9aee-efa3-4965-b121-146cd1fb41f2" />
+
+<img width="1120" height="720" alt="image" src="https://github.com/user-attachments/assets/d73bc4bd-9911-471a-97d4-242264b813ed" />
 
 
 ## Files
