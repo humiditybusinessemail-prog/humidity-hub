@@ -10,8 +10,9 @@ local GuiService = game:GetService("GuiService")
 
 local Library = {}
 Library.__index = Library
-Library.Version = "2.4.0"
+Library.Version = "2.4.1"
 Library.DefaultLogo = 127590426518205
+Library.DefaultScale = 1.25
 
 local Tab = {}
 Tab.__index = Tab
@@ -650,7 +651,7 @@ function Library.new(opts)
     self.Accent = opts.Accent or self.Theme.Accent
     self.CustomAccent = opts.Accent ~= nil
 
-    self.UserScale = clamp(tonumber(opts.Scale) or 1, 0.6, 1.6)
+    self.UserScale = clamp(tonumber(opts.Scale) or Library.DefaultScale, 0.6, 1.6)
     self.ToggleKey = toKeyCode(opts.ToggleKey or Enum.KeyCode.RightShift)
     if self.ToggleKey == Enum.KeyCode.Unknown then
         self.ToggleKey = Enum.KeyCode.RightShift
@@ -2532,7 +2533,7 @@ function Library:SetAccent(color)
 end
 
 function Library:SetScale(scale)
-    self.UserScale = clamp(tonumber(scale) or 1, 0.6, 1.6)
+    self.UserScale = clamp(tonumber(scale) or Library.DefaultScale, 0.6, 1.6)
     if self.Visible then
         tw(self.Scaler, 0.2, { Scale = self.UserScale })
     else
