@@ -25,6 +25,8 @@ Current version: **2.4.1**
 - [Executor functions used](#executor-functions-used)
 - [Notes](#notes)
 
+## Example image of Humidity Hub
+
 <img width="1163" height="742" alt="image" src="https://github.com/user-attachments/assets/44ea9aee-efa3-4965-b121-146cd1fb41f2" />
 
 <img width="1120" height="720" alt="image" src="https://github.com/user-attachments/assets/d73bc4bd-9911-471a-97d4-242264b813ed" />
