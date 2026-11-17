@@ -8,6 +8,7 @@ Current version: **2.4.1**
 
 ## Contents
 
+- [Example](#Example-Image-Of-Humidity-Hub)
 - [Install](#install)
 - [Quick start](#quick-start)
 - [Window options](#window-options)
